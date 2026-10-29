@@ -7,50 +7,43 @@
   <meta name="description" content="Tanmay — First-year B.Tech CS & AI student at Newton School of Technology, Rishihood University. Python developer, video creator, and vibe coder.">
   <title>Tanmay | Portfolio</title>
 
-  <!-- ===== GOOGLE FONTS ===== -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
   <style>
     /* ============================================================
        CSS VARIABLES — edit these to re-theme the entire site
        ============================================================ */
     :root {
-      /* Background gradient — dark grey */
-      --bg-1: #111111;
-      --bg-2: #1a1a1a;
-      --bg-3: #222222;
+      /* Claude-inspired graphite glass palette */
+      --bg-1: #191817;
+      --bg-2: #242220;
+      --bg-3: #171615;
 
-      /* Accent colors — grey & white theme */
-      --accent: #e5e5e5;
-      --accent-light: #ffffff;
-      --accent-glow: rgba(255, 255, 255, 0.2);
-      --teal: #a3a3a3;
-      --teal-glow: rgba(163, 163, 163, 0.2);
-      --pink: #d4d4d4;
-      --pink-glow: rgba(212, 212, 212, 0.2);
+      --accent: #d97757;
+      --accent-light: #e58b69;
+      --accent-glow: rgba(217, 119, 87, 0.2);
+      --teal: #b7aaa0;
+      --teal-glow: rgba(183, 170, 160, 0.14);
+      --pink: #e5a078;
+      --pink-glow: rgba(229, 160, 120, 0.14);
 
-      /* Glass — 20% opacity */
-      --glass-bg: rgba(255, 255, 255, 0.07);
+      --glass-bg: rgba(55, 53, 51, 0.48);
       --glass-border: rgba(255, 255, 255, 0.12);
-      --glass-hover-border: rgba(255, 255, 255, 0.30);
-      --glass-blur: 18px;
-      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.40);
+      --glass-hover-border: rgba(255, 255, 255, 0.22);
+      --glass-blur: 26px;
+      --glass-shadow: 0 14px 40px rgba(0, 0, 0, 0.2);
 
       /* Text */
-      --text-primary: #f5f5f5;
-      --text-secondary: #a3a3a3;
-      --text-muted: #737373;
+      --text-primary: #f0eeeb;
+      --text-secondary: #c3beb8;
+      --text-muted: #938d87;
 
       /* Spacing */
       --section-pad: clamp(60px, 10vw, 120px) clamp(16px, 5vw, 80px);
-      --radius: 16px;
-      --radius-sm: 10px;
+      --radius: 20px;
+      --radius-sm: 980px;
 
       /* Typography */
-      --font-body: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --font-body: Inter, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+      --font-mono: ui-monospace, "Cascadia Code", "Roboto Mono", Menlo, monospace;
     }
 
     /* ============================================================
@@ -65,6 +58,7 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 80px;
+      overflow-x: clip;
     }
 
     body {
@@ -86,6 +80,48 @@
       background: linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
       background-size: 400% 400%;
       animation: gradientShift 20s ease infinite;
+    }
+
+    .matrix-rain {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.58;
+    }
+
+    .scroll-code-mark {
+      position: fixed;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      width: clamp(120px, 18vw, 220px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      color: rgba(229, 160, 120, 0.42);
+      pointer-events: none;
+      transform: translate(-50%, -50%) perspective(800px) rotateY(-14deg) rotateZ(var(--scroll-rotation, 0deg));
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .scroll-code-mark svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.18));
+    }
+
+    .scroll-code-mark path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     @keyframes gradientShift {
@@ -199,20 +235,32 @@
        SCROLL-DRIVEN REVEAL (with fallback)
        ============================================================ */
     @keyframes scrollReveal {
-      from { opacity: 0; transform: translateY(50px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        translate: 0 32px;
+        rotate: x 5deg;
+        scale: 0.985;
+      }
+      to {
+        opacity: 1;
+        translate: 0 0;
+        rotate: x 0deg;
+        scale: 1;
+      }
     }
 
     .reveal {
       opacity: 1; /* fallback: always visible */
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     @supports (animation-timeline: view()) {
       .reveal {
         opacity: 0;
-        animation: scrollReveal ease both;
+        animation: scrollReveal 1s ease both;
         animation-timeline: view();
-        animation-range: entry 0% entry 35%;
+        animation-range: entry 0% entry 40%;
       }
     }
 
@@ -644,27 +692,11 @@
       text-align: right;
     }
 
-    /* Skill chip pop-in animation */
+    /* Skill bar timing */
     .skill-card:nth-child(1) .skill-bar__fill { animation-delay: 0.2s; }
     .skill-card:nth-child(2) .skill-bar__fill { animation-delay: 0.4s; }
     .skill-card:nth-child(3) .skill-bar__fill { animation-delay: 0.6s; }
     .skill-card:nth-child(4) .skill-bar__fill { animation-delay: 0.8s; }
-
-    @keyframes chipPop {
-      0%   { opacity: 0; transform: scale(0.7); }
-      80%  { transform: scale(1.05); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    .skill-card {
-      animation: chipPop 0.5s ease forwards;
-      opacity: 0;
-    }
-
-    .skill-card:nth-child(1) { animation-delay: 0.15s; }
-    .skill-card:nth-child(2) { animation-delay: 0.3s; }
-    .skill-card:nth-child(3) { animation-delay: 0.45s; }
-    .skill-card:nth-child(4) { animation-delay: 0.6s; }
 
     /* ============================================================
        PROJECTS SECTION
@@ -947,8 +979,356 @@
        SELECTION STYLING
        ============================================================ */
     ::selection {
-      background: rgba(255, 255, 255, 0.3);
-      color: #fff;
+      background: rgba(217, 119, 87, 0.28);
+      color: #f0eeeb;
+    }
+
+    /* ============================================================
+       CLAUDE-INSPIRED GRAPHITE GLASS THEME
+       ============================================================ */
+    body {
+      background: var(--bg-1);
+      letter-spacing: -0.01em;
+    }
+
+    .bg-canvas {
+      background:
+        radial-gradient(ellipse at 78% 12%, rgba(183, 126, 96, 0.22), transparent 34%),
+        radial-gradient(ellipse at 16% 68%, rgba(119, 116, 111, 0.2), transparent 40%),
+        radial-gradient(ellipse at 82% 78%, rgba(143, 92, 75, 0.14), transparent 32%),
+        linear-gradient(145deg, #242321 0%, #191817 52%, #211f1d 100%);
+      animation: none;
+    }
+
+    .orb {
+      display: block;
+      filter: blur(120px);
+      opacity: 0.18;
+    }
+
+    .orb--1 {
+      background: radial-gradient(circle, #a87051 0%, transparent 70%);
+    }
+
+    .orb--2 {
+      background: radial-gradient(circle, #827e78 0%, transparent 70%);
+    }
+
+    .orb--3 {
+      background: radial-gradient(circle, #8d5c4d 0%, transparent 70%);
+    }
+
+    .navbar {
+      position: relative;
+      z-index: 3;
+      background: rgba(29, 28, 27, 0.7);
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 1px 24px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(28px) saturate(1.2);
+      -webkit-backdrop-filter: blur(28px) saturate(1.2);
+    }
+
+    .navbar__logo {
+      background: none;
+      -webkit-text-fill-color: var(--text-primary);
+      color: var(--text-primary);
+      font-size: 1.2rem;
+    }
+
+    .navbar__links a {
+      font-size: 0.82rem;
+    }
+
+    .navbar__links a::after {
+      background: var(--accent);
+    }
+
+    .navbar__contact,
+    .btn--primary {
+      background: var(--accent);
+      color: #fff !important;
+      box-shadow: none;
+    }
+
+    .navbar__contact:hover,
+    .btn--primary:hover {
+      background: #c96d4e;
+      color: #fff !important;
+      box-shadow: 0 6px 18px var(--accent-glow);
+    }
+
+    .navbar__toggle span {
+      background: var(--text-primary);
+    }
+
+    .navbar__links {
+      background: rgba(40, 38, 36, 0.82);
+      backdrop-filter: blur(30px) saturate(1.2);
+      -webkit-backdrop-filter: blur(30px) saturate(1.2);
+    }
+
+    @media (max-width: 768px) {
+      .navbar__links {
+        right: 0;
+        transform: translateX(100%);
+        visibility: hidden;
+        transition: transform 0.35s ease, visibility 0s linear 0.35s;
+      }
+
+      .navbar__check:checked ~ .navbar__links {
+        right: 0;
+        transform: translateX(0);
+        visibility: visible;
+        transition: transform 0.35s ease;
+      }
+    }
+
+    .section__label {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .section__title {
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .hero {
+      position: relative;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero__greeting {
+      font-family: var(--font-body);
+      color: var(--text-secondary);
+      padding: 7px 14px;
+      background: rgba(67, 64, 61, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 980px;
+      backdrop-filter: blur(18px) saturate(1.2);
+      -webkit-backdrop-filter: blur(18px) saturate(1.2);
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.12);
+    }
+
+    .hero__name {
+      letter-spacing: -0.065em;
+      background: linear-gradient(135deg, #f0eeeb 20%, #c5a18e 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero__role {
+      color: var(--text-secondary);
+      letter-spacing: -0.025em;
+    }
+
+    .typing-wrapper {
+      border-right-color: var(--accent);
+    }
+
+    .hero__desc {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.1rem;
+    }
+
+    .hero__buttons {
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 0.9rem;
+    }
+
+    .btn--outline {
+      background: rgba(64, 61, 58, 0.46);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(18px) saturate(1.2);
+      -webkit-backdrop-filter: blur(18px) saturate(1.2);
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn--outline:hover {
+      background: rgba(84, 79, 74, 0.62);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .glass {
+      background: var(--glass-bg);
+      border-color: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(var(--glass-blur)) saturate(1.45);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.45);
+    }
+
+    .glass:hover {
+      border-color: var(--glass-hover-border);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.27), inset 0 1px rgba(255, 255, 255, 0.16);
+    }
+
+    .about__text {
+      color: var(--text-secondary);
+    }
+
+    .about__text strong {
+      color: var(--text-primary);
+    }
+
+    .fact {
+      border-bottom-color: rgba(255, 255, 255, 0.09);
+    }
+
+    .fact__icon {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+    }
+
+    .skill-card:hover,
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
+    }
+
+    .skill-card__desc {
+      color: var(--text-secondary);
+    }
+
+    .skill-bar {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .skill-bar__fill--python {
+      background: linear-gradient(90deg, #c86d4f, #e29a76);
+    }
+
+    .skill-bar__fill--bash {
+      background: linear-gradient(90deg, #8a8179, #b6aaa0);
+    }
+
+    .skill-bar__fill--video {
+      background: linear-gradient(90deg, #ac624a, #d99a72);
+    }
+
+    .skill-bar__fill--vibe {
+      background: linear-gradient(90deg, #77716b, #aaa19a);
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.08);
+      color: #d2ccc5;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .project-card__link,
+    .project-card__link:hover,
+    .contact__email,
+    .contact__email:hover {
+      color: var(--accent);
+    }
+
+    .timeline::before {
+      background: linear-gradient(180deg, var(--accent), #76665d);
+    }
+
+    .timeline__item::before {
+      background: var(--accent);
+      border-color: #242220;
+    }
+
+    .timeline__year {
+      color: var(--text-muted);
+    }
+
+    .timeline__place {
+      color: var(--accent);
+    }
+
+    .social-link {
+      background: rgba(61, 58, 55, 0.48);
+      color: var(--text-secondary);
+      border-color: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(18px) saturate(1.2);
+      -webkit-backdrop-filter: blur(18px) saturate(1.2);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.12);
+    }
+
+    .social-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .footer span {
+      color: var(--accent);
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #66615d;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #827a73;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding-left: clamp(16px, 4vw, 48px);
+      }
+
+    }
+
+    .glass,
+    .btn,
+    .social-link,
+    .navbar__links a {
+      transition-duration: 0.24s;
+      transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      perspective: 1400px;
+    }
+
+    .footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    .fact__icon {
+      color: var(--text-primary);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb {
+        display: none;
+      }
+
+      .scroll-code-mark {
+        will-change: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        animation: none;
+        translate: none;
+        rotate: none;
+        scale: none;
+      }
     }
   </style>
 </head>
@@ -960,6 +1340,12 @@
     <div class="orb orb--1"></div>
     <div class="orb orb--2"></div>
     <div class="orb orb--3"></div>
+  </div>
+  <canvas class="matrix-rain" aria-hidden="true"></canvas>
+  <div class="scroll-code-mark" aria-hidden="true">
+    <svg viewBox="0 0 100 100" focusable="false">
+      <path d="M35 23 10 50l25 27M65 23l25 27-25 27M59 13 41 87" />
+    </svg>
   </div>
 
   <!-- ===== NAVBAR ===== -->
@@ -1254,6 +1640,151 @@
     <p>&copy; 2026 <span>Tanmay</span>. Crafted with passion and clean code.</p>
   </footer>
 
+  <script>
+    const codeMark = document.querySelector(".scroll-code-mark");
+    const matrixCanvas = document.querySelector(".matrix-rain");
+    const matrixContext = matrixCanvas.getContext("2d");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const matrixFontSize = 18;
+    const matrixFrameInterval = 1000 / 120;
+    const matrixCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789{}[]()<>/\\|=+-_*&^%$#@!?:;.,~";
+    let matrixColumns = 0;
+    let matrixDrops = [];
+    let rotationFrame = 0;
+    let matrixFrame = 0;
+    let lastMatrixFrame = 0;
+
+    function resizeMatrixCanvas() {
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      matrixCanvas.width = Math.round(window.innerWidth * pixelRatio);
+      matrixCanvas.height = Math.round(window.innerHeight * pixelRatio);
+      matrixContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      matrixColumns = Math.ceil(window.innerWidth / matrixFontSize);
+      matrixDrops = Array.from(
+        { length: matrixColumns },
+        () => Math.random() * (window.innerHeight / matrixFontSize)
+      );
+      drawMatrixRain();
+    }
+
+    function drawMatrixRain(frameScale = 1) {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const fadeStart = Math.min(width, height) * 0.16;
+      const fadeEnd = fadeStart + Math.min(width, height) * 0.3;
+
+      matrixContext.clearRect(0, 0, width, height);
+      matrixContext.font = `${matrixFontSize}px ui-monospace, monospace`;
+      matrixContext.textAlign = "center";
+
+      for (let column = 0; column < matrixColumns; column += 1) {
+        const x = column * matrixFontSize + matrixFontSize / 2;
+        const dropY = matrixDrops[column] * matrixFontSize;
+
+        for (let trail = 0; trail < 10; trail += 1) {
+          const y = dropY - trail * matrixFontSize;
+          if (y < 0 || y > height) continue;
+
+          const distance = Math.hypot(x - centerX, y - centerY);
+          const fadeProgress = Math.min(
+            1,
+            Math.max(0, (distance - fadeStart) / (fadeEnd - fadeStart))
+          );
+          const proximityFade = fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
+          const trailOpacity = (1 - trail / 10) * proximityFade * 0.38;
+          if (trailOpacity <= 0.01) continue;
+
+          matrixContext.fillStyle = trail === 0
+            ? `rgba(229, 160, 120, ${trailOpacity})`
+            : `rgba(196, 184, 173, ${trailOpacity * 0.62})`;
+          const characterIndex = Math.floor(Math.random() * matrixCharacters.length);
+          matrixContext.fillText(matrixCharacters[characterIndex], x, y);
+        }
+
+        if (!reducedMotion.matches) {
+          matrixDrops[column] += (0.35 + Math.random() * 0.55) * frameScale;
+          if (matrixDrops[column] * matrixFontSize > height + Math.random() * height) {
+            matrixDrops[column] = 0;
+          }
+        }
+      }
+    }
+
+    function animateMatrixRain(timestamp) {
+      matrixFrame = 0;
+      if (timestamp - lastMatrixFrame + 0.01 < matrixFrameInterval) {
+        if (!reducedMotion.matches) {
+          matrixFrame = window.requestAnimationFrame(animateMatrixRain);
+        }
+        return;
+      }
+
+      const elapsed = lastMatrixFrame === 0
+        ? matrixFrameInterval
+        : Math.min(timestamp - lastMatrixFrame, 80);
+      const frameScale = elapsed / 80;
+      lastMatrixFrame = lastMatrixFrame === 0
+        ? timestamp
+        : lastMatrixFrame + Math.max(
+          matrixFrameInterval,
+          Math.floor((timestamp - lastMatrixFrame + 0.01) / matrixFrameInterval) * matrixFrameInterval
+        );
+      drawMatrixRain(frameScale);
+
+      if (!reducedMotion.matches) {
+        matrixFrame = window.requestAnimationFrame(animateMatrixRain);
+      }
+    }
+
+    function requestMatrixFrame() {
+      if (matrixFrame) {
+        window.cancelAnimationFrame(matrixFrame);
+      }
+      matrixFrame = window.requestAnimationFrame(animateMatrixRain);
+    }
+
+    function updateCodeMarkRotation() {
+      rotationFrame = 0;
+      if (reducedMotion.matches) {
+        codeMark.style.setProperty("--scroll-rotation", "0deg");
+        return;
+      }
+
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollProgress = scrollableHeight > 0
+        ? Math.min(1, Math.max(0, window.scrollY / scrollableHeight))
+        : 0;
+
+      codeMark.style.setProperty("--scroll-rotation", `${scrollProgress * 360}deg`);
+    }
+
+    function requestCodeMarkRotation() {
+      if (!rotationFrame) {
+        rotationFrame = window.requestAnimationFrame(updateCodeMarkRotation);
+      }
+    }
+
+    window.addEventListener("scroll", requestCodeMarkRotation, { passive: true });
+    window.addEventListener("resize", () => {
+      resizeMatrixCanvas();
+      requestCodeMarkRotation();
+    }, { passive: true });
+    reducedMotion.addEventListener("change", () => {
+      requestCodeMarkRotation();
+      if (reducedMotion.matches) {
+        window.cancelAnimationFrame(matrixFrame);
+        matrixFrame = 0;
+        drawMatrixRain();
+      } else {
+        requestMatrixFrame();
+      }
+    });
+    resizeMatrixCanvas();
+    requestCodeMarkRotation();
+    requestMatrixFrame();
+  </script>
+
 </body>
 </html>
-
